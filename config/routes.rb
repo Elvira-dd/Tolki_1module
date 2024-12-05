@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+
+  namespace :api, format: "json" do
+    namespace :v1 do
+      resources :posts, only: [:index, :show]
+    end
+  end
+  
+
+
   devise_for :users
   get "about_us/index"
   get "main/index"

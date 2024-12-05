@@ -1,9 +1,15 @@
+<%
+=begin%>
 <div class="bgGif">
 
-<div class="emailForm">
-<h1>Устал часами искать интересный подкаст? Тогда тебе к нам!</h1>
-<div id="new_subscription"> 
-<%= render "subscriptions/form"%>
+    <div class="emailForm">
+        <h1>Устал часами искать интересный подкаст? Тогда тебе к нам!</h1>
+        <div id="new_subscription">
+            <%= render "subscriptions/form"%>
+        </div>
+    </div>
 </div>
-</div>
-</div>
+<%
+=end%>
+
+<%= api_v1_posts_url %>
