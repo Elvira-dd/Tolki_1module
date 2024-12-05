@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_post, only: %i[new create]
+  before_action :set_post, only: [:create, :destroy, :like]
   before_action :set_comment, only: %i[edit update destroy]
 
   # GET /comments/new
@@ -24,7 +24,18 @@ class CommentsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
+
+  def like 
+    likes = @comment.likes.where(user_id: current_user.id)
+    if likes.count > 0
+      likes.each do |like|
+        like.destroy!
+      end
+    else
+      @comment.likes.create(user_id: current_user.id)
+    end
+    redirect_to @comment.post
+  end
 
   # GET /comments/1/edit
   def edit; end

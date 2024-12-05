@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy like ]
   
 
   # GET /posts or /posts.json
@@ -49,7 +49,15 @@ class PostsController < ApplicationController
       end
     end
   end
-
+  def like 
+    likes = @post.likes.where(user_id: current_user.id)
+    if likes.count > 0
+      likes.destroy_all
+    else
+      @post.likes.create(user_id: current_user.id)
+    end
+    redirect_to @post
+  end
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy!
@@ -70,4 +78,5 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content, :is_comments_open, :link, :hashtag)
     end
+    
 end

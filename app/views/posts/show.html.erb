@@ -1,26 +1,35 @@
+<%
+likes_count = @post.likes.count
+like_text = "Like (#{likes_count})"
+
+if current_user && @post.likes.where(user_id: current_user.id).count > 0
+  like_text = "Unlike (#{likes_count})"
+end
+%>
 <p style="color: green"><%= notice %></p>
 
 <%= render @post %>
 <% if can? :create, Post %>
 <div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
+    <%= link_to like_text, like_post_path(@post) %> |
+    <%= link_to "Edit this post", edit_post_path(@post) %> |
+    <%= link_to "Back to posts", posts_path %>
 
-  <%= button_to "Destroy this post", @post, method: :delete %>
+    <%= button_to "Destroy this post", @post, method: :delete %>
 </div>
 <%end%>
 <div>
-<div>
-  <% if @post.is_comments_open %>
     <div>
-    <% if can? :create, Comment %>
-    <div>
-     <h2>Add a comment:</h2>
-      <%= render "comments/form" %>
+        <% if @post.is_comments_open %>
+        <div>
+            <% if can? :create, Comment %>
+            <div>
+                <h2>Add a comment:</h2>
+                <%= render "comments/form" %>
+            </div>
+            <%end%>
+            <h2>Comments</h2>
+            <%= render @post.comments %>
+        </div>
+        <% end %>
     </div>
-     <%end%>
-      <h2>Comments</h2>
-      <%= render @post.comments %>
-    </div>
-  <% end %>
-</div>

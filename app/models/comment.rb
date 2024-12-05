@@ -10,4 +10,5 @@ class Comment < ApplicationRecord
   # Сортировка по умолчанию: сначала самые старые комментарии
   scope :ordered, -> { order(created_at: :desc) }
   scope :not_replies, -> { where(comment_id: nil) }
+  has_many :likes, as: :likeable
 end

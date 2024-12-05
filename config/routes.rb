@@ -24,7 +24,14 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :comments
+    member do
+      get "like"
+    end
+    resources :comments do
+      member do
+        get "like"
+      end
+    end
   end
   resources :tags  
   
