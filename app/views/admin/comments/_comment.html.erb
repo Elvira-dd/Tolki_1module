@@ -1,17 +1,21 @@
 <div class="cardComment">
-<% if comment.persisted? %>
-<h3 class="commenter">
-    <%= comment.user ? comment.user.email : "Unknown User" %>
-  </h3>
-  <p>
-    <%= comment.content %>
-  </p>
+    <% if comment.persisted? %>
+    <div class="comment <%= 'reply' if comment.comment_id.present? %>">
+        <h3 class="commenter">
+            <%= comment.user ? comment.user.email : "Unknown User" %>
+        </h3>
+        <p><%= comment.content %></p>
 
-  <div class="editingComment">
-  <%= button_to 'Edit Comment', edit_admin_post_comment_path(comment.post, comment), method: :get, class: "editButton" %>
+        <!-- Reply Form -->
+        <%= render "admin/comments/form", parent_comment_id: comment.id, post: comment.post %>
 
-  <%= button_to 'Destroy Comment', [:admin, comment.post, comment], method: :delete, data: { turbo_stream: false, confirm: "Are you sure?" }, class: "destroyButton" %>
-</div>
+        <!-- Nested Replies -->
+        <%= render partial: "admin/comments/comment", collection: comment.replies.ordered, as: :comment %>
+    </div>
 
-<% end %>
+    <div class="editingComment">
+        <%= button_to 'Edit Comment', edit_post_comment_path(comment.post, comment), method: :get, class: "editButton" %>
+        <%= button_to 'Destroy Comment', [comment.post, comment], method: :delete, data: { confirm: "Are you sure?" }, class: "destroyButton" %>
+    </div>
+    <% end %>
 </div>

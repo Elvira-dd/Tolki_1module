@@ -2554,6 +2554,9 @@ def create_title
     create_issues(3..10)
     create_post(1..4)
     create_comments(1..6)
+    3.times do
+      create_comment_replies
+    end
 end
 
 def reset_db
@@ -2638,7 +2641,7 @@ def create_comments(quantity)
   posts.each do |post|
   quantity.to_a.sample.times do
     user = User.all.sample
-    comment = Comment.create(
+    comment = Comment.create!(
       post_id: post.id,
       content: create_sentence,
       user_id: user.id
@@ -2649,4 +2652,12 @@ def create_comments(quantity)
   end
 end
 
+def create_comment_replies
+  Comment.all.each do |comment|
+    if rand(1..3) == 1
+      comment_reply = comment.replies.create!(post_id: comment.post_id, content: create_sentence, user_id: comment.user.id)
+      puts "Comment reply with id #{comment.id} for post with id #{comment.post.id} just created"
+    end
+  end
+end
 seed

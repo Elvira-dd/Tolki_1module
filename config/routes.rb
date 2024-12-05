@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
 
   namespace :api, format: "json" do
     namespace :v1 do
@@ -32,6 +33,11 @@ Rails.application.routes.draw do
     resources :issues 
     get 'issues', to: 'issues#issues_for_podcast', as: 'issues_for'
   end
+  namespace :admin do
+    resources :posts do
+      resources :comments, only: [:new, :create, :edit, :update, :destroy]
+    end
+  end  
   resources :subscriptions
   resources :issue do 
     resources :posts 

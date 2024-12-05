@@ -1,4 +1,5 @@
-<%= form_for([:admin, @post, @post.comments.build]) do |form| %>
-  <%= form.text_area :content, placeholder: "Ваше мнение во всей красе", class: 'classicInput'%>
-<%= form.submit "Отправить", class:"formButton"%>
+<%= form_for([@post, @post.comments.build]) do |form| %>
+<%= form.text_area :content, placeholder: "Ваше мнение во всей красе", class: 'classicInput' %>
+<%= form.hidden_field :comment_id, value: parent_comment_id if defined? parent_comment_id %>
+<%= form.submit "Отправить", class: "formButton" %>
 <% end %>

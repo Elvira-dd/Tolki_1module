@@ -1,22 +1,20 @@
 <% if comment.persisted? %>
-<p>
-    <strong>User:</strong>
-    <%= comment.user ? comment.user.email : "Unknown User" %>
-  </p>
-  <p>
-    <strong>Content:</strong>
-    <%= comment.content %>
-  </p>
-
-  <p>
-    <strong>Date:</strong>
-    <%= comment.created_at %>
-  </p>
-
-  <p>
-  <% if can? :create, Comment && (comment.user_name == current_user.email)%>
-  <%= link_to 'Destroy Comment', [comment.post, comment], data: { turbo_stream: false, turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-</p>
-<% end %>
+<div class="comment <%= 'reply' if comment.comment_id != nil %>">
+    <p><%= comment.user ? comment.user.email : "Unknown User" %>
+    </p>
+    <p><%= comment.content %>
+    </p>
+    <p> <%= comment.created_at %>
+    </p>
+    <%= render comment.replies %>
+    <%
+=begin%>
+    <p>
+        <% if can? :create, Comment && (comment.user_name == current_user.email)%>
+        <%= link_to 'Destroy Comment', [comment.post, comment], data: { turbo_stream: false, turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    </p>
+    <%
+=end%>
+</div>
 
 <% end %>

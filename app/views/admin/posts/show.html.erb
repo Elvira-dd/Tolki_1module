@@ -1,20 +1,18 @@
-
-
 <%= render @post %>
 
 <div class="postEditing">
-  <%= link_to "Edit this post", edit_admin_issue_post_path(@post) %> |
-  <%= link_to "Back to posts", admin_posts_path %>
+    <%= link_to "Edit this post", edit_admin_issue_post_path(@post) %> |
+    <%= link_to "Back to posts", admin_posts_path %>
 
-  <%= button_to "Destroy this post", admin_post_path(@post), method: :delete, class:"destroyButton" %>
+    <%= button_to "Destroy this post", admin_post_path(@post), method: :delete, class:"destroyButton" %>
 </div>
 <div>
-<div>
-  <% if @post.is_comments_open %>
-    <div class="postsCommentSection">
-      <h3>Автор готов к бурным обсуждениям</h3>
-      <%= render "admin/comments/form" %>
-      <%= render @post.comments %>
+    <div>
+        <% if @post.is_comments_open %>
+        <div class="postsCommentSection">
+            <h3>Автор готов к бурным обсуждениям</h3>
+            <%= render "admin/comments/form" %>
+            <%= render @post.comments %>
+        </div>
+        <% end %>
     </div>
-  <% end %>
-</div>

@@ -8,3 +8,13 @@ input::placeholder {
 .classicLayout {
   padding: 4vh 6vw;
 }
+
+.comment {
+  padding: 20px;
+}
+.reply {
+  margin-left: 100px;
+  + .editingComment {
+    margin-left: 100px;
+  }
+}

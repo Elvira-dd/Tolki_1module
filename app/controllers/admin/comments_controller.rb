@@ -28,14 +28,15 @@ class Admin::CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params.merge(user_id: current_user.id))
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to [:admin, @post], notice: "Comment was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+  
+    if @comment.save
+      redirect_to admin_post_path(@post), notice: "Comment was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
+  
+  
   
   
 
