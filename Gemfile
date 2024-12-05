@@ -1,6 +1,9 @@
 source "https://rubygems.org"
 
-
+gem "carrierwave", "~> 3.0"
+gem "russian"
+gem "meta-tags"
+gem "sassc"
 gem 'rack-cors'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.1"

@@ -1,14 +1,18 @@
-
-
-<% content_for :title, "Все посты" %>
+<%
+set_meta_tags(
+  title: "Tolki - посты",
+  description: "Посты для проекта Tolki",
+  keywords: "Подкасты , Рецензии, Информация"
+)
+%>
 
 <h1>Посты</h1>
 
 <div id="posts" class="allPostsPage">
-  <% @posts.each do |post| %>
+    <% @posts.each do |post| %>
     <%= render post %>
     <p>
-      
+
     </p>
-  <% end %>
+    <% end %>
 </div>

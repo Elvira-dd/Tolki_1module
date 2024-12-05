@@ -8,6 +8,6 @@ class Comment < ApplicationRecord
   validates :content, presence: true
 
   # Сортировка по умолчанию: сначала самые старые комментарии
-  scope :ordered, -> { order(created_at: :asc) }
+  scope :ordered, -> { order(created_at: :desc) }
   scope :not_replies, -> { where(comment_id: nil) }
 end
