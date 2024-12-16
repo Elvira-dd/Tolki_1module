@@ -1,13 +1,9 @@
-
-
 <% content_for :title, "Все подкасты" %>
 
 <h1>Подкасты</h1>
 
 <div id="podcasts" class="allPodcastsPage">
-  <% @podcasts.each do |podcast| %>
+    <% @podcasts.each do |podcast| %>
     <%= render podcast %>
-  <% end %>
+    <% end %>
 </div>
-
-

@@ -2533,7 +2533,9 @@ def create_content
 
   sentence = sentence_words.join(' ').capitalize + '.'
 end
-
+def random_rating
+  rand(1..100)
+end
 def create_title
     sentence_words = []
   
@@ -2554,9 +2556,12 @@ def create_title
     create_issues(3..10)
     create_post(1..4)
     create_comments(1..6)
+    create_tags(1..3)
+    
     3.times do
       create_comment_replies
     end
+    create_authors(1..3)
 end
 
 def reset_db
@@ -2587,7 +2592,7 @@ end
 
 def create_podcast(quantity)
     quantity.times do 
-        podcast = Podcast.create!(name: @companies.sample[:name], description: create_sentence)
+        podcast = Podcast.create!(name: @companies.sample[:name], description: create_sentence, cover: "cover_test.png", average_rating:"Средняя оценка:#{random_rating}/100" )
     end
 end
 
@@ -2602,7 +2607,26 @@ def create_issues(quantity)
     end
   end
 
-
+  def create_tags(quantity)
+    Podcast.all.each do |podcast|
+      i = 1
+      quantity.to_a.sample.times do 
+        tag = podcast.tags.create!(text: "TestTag")
+        i += 1
+      puts "Tag with id #{tag.id} just created and podcast id #{podcast.id}"
+      end
+    end
+  end
+  def create_authors(quantity)
+    Podcast.all.each do |podcast|
+      i = 1
+      quantity.to_a.sample.times do 
+        author = podcast.authors.create!(name: create_title)
+        i += 1
+      puts "Author with id #{author.id} just created for podcast id #{podcast.id}"
+      end
+    end
+  end
 
 
 

@@ -10,6 +10,8 @@ class PodcastsController < ApplicationController
   # GET /podcasts/1 or /podcasts/1.json
   def show
     @issues = Issue.where(link: @podcast.name)
+    @podcast = Podcast.find(params[:id])
+    @posts = @podcast.posts.includes(:issue)
   end
 
   # GET /podcasts/new
@@ -67,6 +69,6 @@ class PodcastsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def podcast_params
-      params.require(:podcast).permit(:name, :description)
+      params.require(:podcast).permit(:name, :description, :cover, :average_rating)
     end
 end

@@ -10,6 +10,8 @@ class Admin::PodcastsController < ApplicationController
   # GET /admin/podcasts/1
   def show
     @issues = Issue.where(link: @podcast.name)
+    @tags = @podcast.tags
+    @authors = @podcast.authors
   end
 
   # GET /admin/podcasts/new
@@ -67,6 +69,6 @@ class Admin::PodcastsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def podcast_params
-    params.require(:podcast).permit(:name, :description)
+    params.require(:podcast).permit(:name, :description, author_ids: [])
   end
 end

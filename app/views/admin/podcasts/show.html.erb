@@ -3,14 +3,33 @@
 <%= render @podcast %>
 
 <div class="podcastEditing">
-  <%= link_to "Edit this podcast", edit_admin_podcast_path(@podcast) %> 
+    <%= link_to "Edit this podcast", edit_admin_podcast_path(@podcast) %>
 </div>
-
+<div class="podcastsTags">
+    <% @tags.each do |tag| %>
+    <%= render tag %>
+    <% end %>
+</div>
+<div class="podcastsAuthors">
+    <% @authors.each do |author| %>
+    <%= render author %>
+    <% end %>
+</div>
 <div class="podcastsIssues">
-<h1>Выпуски подкаста</h1>
-<div id="issues" class="allIssuesPage">
-  <% @issues.each do |issue| %>
-    <%= render issue %>
-  <% end %>
+    <h1>Выпуски подкаста</h1>
+    <div id="issues" class="allIssuesPage">
+        <% @issues.each do |issue| %>
+        <%= render issue %>
+        <% end %>
+    </div>
 </div>
+<h2>Posts</h2>
+<div id="posts">
+    <% if @posts.present? %>
+    <% @posts.each do |post| %>
+    <%= render post %>
+    <% end %>
+    <% else %>
+    <p>No posts available.</p>
+    <% end %>
 </div>
