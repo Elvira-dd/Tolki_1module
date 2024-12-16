@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   devise_for :users
   get "about_us/index"
   get "main/index"
+  get "promo/index"
   
   resources :subscriptions, only: [:create]
   resources :podcasts do 
