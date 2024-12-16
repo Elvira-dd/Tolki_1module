@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-
+#
 gem "carrierwave", "~> 3.0"
 gem "russian"
 gem "meta-tags"
