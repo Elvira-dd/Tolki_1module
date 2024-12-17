@@ -2546,6 +2546,15 @@ def create_title
     sentence = sentence_words.join(' ').capitalize + '.'
   end
 
+  def create_tag_text
+    sentence_words = []
+  
+    (1..2).to_a.sample.times do
+      sentence_words << @words.sample
+    end
+  
+    sentence = sentence_words.join(' ').capitalize + '.'
+  end
 
 
 
@@ -2601,7 +2610,7 @@ def create_issues(quantity)
     Podcast.all.each do |podcast|
       i = 1
       quantity.to_a.sample.times do 
-        issue = podcast.issues.create!(name: "Выпуск #{create_title}", link: podcast.name)
+        issue = podcast.issues.create!(name: "Выпуск #{create_title}", link: podcast.name, cover: "issue_cover_test.png")
         i += 1
       end
     end
@@ -2611,7 +2620,7 @@ def create_issues(quantity)
     Podcast.all.each do |podcast|
       i = 1
       quantity.to_a.sample.times do 
-        tag = podcast.tags.create!(text: "TestTag")
+        tag = podcast.tags.create!(text: create_tag_text, cover: "tag_cover_test.png")
         i += 1
       puts "Tag with id #{tag.id} just created and podcast id #{podcast.id}"
       end
@@ -2621,7 +2630,7 @@ def create_issues(quantity)
     Podcast.all.each do |podcast|
       i = 1
       quantity.to_a.sample.times do 
-        author = podcast.authors.create!(name: create_title)
+        author = podcast.authors.create!(name: create_title, level:random_rating, description: create_sentence, avatar: "cover_test.png")
         i += 1
       puts "Author with id #{author.id} just created for podcast id #{podcast.id}"
       end

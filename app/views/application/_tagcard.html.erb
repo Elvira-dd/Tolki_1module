@@ -1,0 +1,4 @@
+<div class="TagCard">
+    <%= image_tag tag.cover, alt: tag.text, class: "TagCoverImage" if tag.cover.present? %>
+    <h3><%= tag.text %></h3>
+</div>

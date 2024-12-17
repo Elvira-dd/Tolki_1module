@@ -1,0 +1,9 @@
+<div class="AuthorCard">
+    <%= image_tag author.avatar, alt: author.name, class: "AuthorAvatarImage" if author.avatar.present? %>
+    <h3><%= author.name %></h3>
+    <div class="AuthorLevel">
+        <p>Уровень автора: <%= author.level %></p>
+    </div>
+    <p><%= author.description %></p>
+    <div сlass="SecondaryButton"> читать рецензии </div>
+</div>

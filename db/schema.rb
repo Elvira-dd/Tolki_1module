@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_16_094055) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_17_132257) do
   create_table "authors", force: :cascade do |t|
     t.text "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "avatar"
+    t.integer "level"
   end
 
   create_table "authors_podcasts", id: false, force: :cascade do |t|
@@ -44,6 +46,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_16_094055) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "podcast_id", null: false
+    t.text "cover"
     t.index ["podcast_id"], name: "index_issues_on_podcast_id"
   end
 
@@ -99,6 +102,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_16_094055) do
     t.integer "podcast_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "cover"
     t.index ["podcast_id"], name: "index_tags_on_podcast_id"
   end
 

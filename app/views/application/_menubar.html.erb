@@ -1,7 +1,5 @@
 <div class="Menu">
-    <%= link_to "Промо", promo_index_url%>
     <%= link_to "Главная", root_url%>
-    <%= link_to "О нас", about_us_index_url%>
     <% if user_signed_in? && !current_user.admin %>
     <%= link_to "Подкасты", podcasts_url%>
     <%= link_to "Посты", posts_url%>
@@ -11,14 +9,18 @@
     <%
 =end%>
     <%= link_to current_user.email, edit_user_registration_path %>
+    <%
+=begin%>
     <%= link_to "Выйти", destroy_user_session_path, data: { "turbo-method": :delete } %>
+    <%
+=end%>
     <%elsif user_signed_in? && current_user.admin? %>
-    <%= link_to "Подкасты", admin_podcasts_url%>
-    <%= link_to "Посты", admin_posts_url%>
-    <%= link_to "Подписки", admin_subscriptions_url %>
-    <%= link_to "Выйти", destroy_user_session_path, data: { "turbo-method": :delete } %>
+    <%= link_to "Рекомендации", admin_podcasts_url%>
+    <%= link_to "О нас", about_us_index_url%>
     <%else%>
+    <%= link_to "О нас", about_us_index_url%>
     <%= link_to "Войти", new_user_session_path %>
     <%end%>
+
 </div>
 <p style="color: red"> <%= alert %> </p>

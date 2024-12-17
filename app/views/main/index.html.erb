@@ -1,1 +1,47 @@
-UFDKFYZ
+<div class="PlacePost">
+    <h1>Ищи и оставляй отзывы о своих любимых подкастах </h1>
+    <div class="MainButton">Оставить первую рецензию </div>
+</div>
+<div class="AuthorTop">
+    <h2>Сегодня в топе эти авторы: </h2>
+    <div class="AuthorTopList">
+        <% @authors.each do |author| %>
+        <%= render partial: "authorcard", locals: { author: author } %>
+        <% end %>
+    </div>
+</div>
+<div class="HistoryTop">
+    <div class="HistoryTopTitle">
+        <h2>Если хочешь послушать про историю </h2>
+        <h4>посмотреть все</h4>
+    </div>
+    <div class="HistoryTopList">
+        <% @podcasts.each do |podcast| %>
+        <%= render partial: "podcastcard", locals: { podcast: podcast } %>
+        <% end %>
+    </div>
+</div>
+<div class="NewIssues">
+    <div class="NewIssuesTitle">
+        <h2>Свежие выпуск подкаста <%= @new_podcast.name %></h2>
+        <h4>посмотреть все выпуски</h4>
+    </div>
+    <div class="NewIssuesList">
+        <%= render partial: "issuecard", locals: { issue: @latest_issue_for_new_podcast } %>
+    </div>
+</div>
+<div class="AmASession">
+    <h1>Ask me anything сессия с «<%= @ama_podcast.name %>» </h1>
+    <div class="MainButton">поучавствовать в сессии </div>
+</div>
+<div class="Themes">
+    <div class="ThemesTitle">
+        <h2>Тематики</h2>
+        <h4>посмотреть все</h4>
+    </div>
+    <div class="ThemeList">
+        <% @tags.each do |tag| %>
+        <%= render partial: "tagcard", locals: { tag: tag } %>
+        <% end %>
+    </div>
+</div>

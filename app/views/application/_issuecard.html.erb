@@ -1,0 +1,9 @@
+<div class="IssueCard">
+    <% if issue.cover.present? %>
+    <%= image_tag issue.cover, alt: issue.name, class: "IssueCoverImage" %>
+    <% else %>
+    <p>Изображение не доступно</p>
+    <% end %>
+    <h3><%= issue.name %></h3>
+    <p><%= issue.created_at.strftime("%d.%m.%Y") %></p>
+</div>
