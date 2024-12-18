@@ -1,26 +1,32 @@
 <div class="Menu">
-    <%= link_to "Главная", root_url%>
     <% if user_signed_in? && !current_user.admin %>
-    <%= link_to "Подкасты", podcasts_url%>
-    <%= link_to "Посты", posts_url%>
-    <%
-=begin%>
-    МЕНЮ АДМИНА
-    <%
-=end%>
-    <%= link_to current_user.email, edit_user_registration_path %>
-    <%
-=begin%>
-    <%= link_to "Выйти", destroy_user_session_path, data: { "turbo-method": :delete } %>
-    <%
-=end%>
-    <%elsif user_signed_in? && current_user.admin? %>
-    <%= link_to "Рекомендации", admin_podcasts_url%>
-    <%= link_to "О нас", about_us_index_url%>
-    <%else%>
-    <%= link_to "О нас", about_us_index_url%>
-    <%= link_to "Войти", new_user_session_path %>
-    <%end%>
+    <%= link_to "Главная", root_url%>
+    <%= link_to "Рекомендации", recommendation_path%>
+    <div class="MainButton">
+        <%= link_to "Написать рецензию", new_admin_post_path%>
+    </div>
+    <div class="MainButton">
+        <%= link_to "Профиль", my_profile_path%>
+    </div>
 
+    <%elsif user_signed_in? && current_user.admin? %>
+    <%= link_to "Главная", root_url%>
+    <%= link_to "Рекомендации", recommendation_path%>
+    <%= link_to "О проекте", about_us_index_url%>
+    <div class="MainButton">
+        <%= link_to "Написать рецензию", new_admin_post_path%>
+    </div>
+    <div class="MainButton">
+        <%= link_to "Профиль", my_profile_path%>
+    </div>
+
+    <%else%>
+    <%= link_to "Главная", root_url%>
+    <%= link_to "О проекте", about_us_index_url%>
+    <div class="MainButton">
+        <%= link_to "Профиль", new_user_registration_path%>
+    </div>
+    <%end%>
 </div>
+
 <p style="color: red"> <%= alert %> </p>

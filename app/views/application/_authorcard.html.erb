@@ -1,4 +1,5 @@
 <div class="AuthorCard">
+    <%= link_to admin_author_path(author) do %>
     <%= image_tag author.avatar, alt: author.name, class: "AuthorAvatarImage" if author.avatar.present? %>
     <h3><%= author.name %></h3>
     <div class="AuthorLevel">
@@ -6,4 +7,5 @@
     </div>
     <p><%= author.description %></p>
     <div сlass="SecondaryButton"> читать рецензии </div>
+    <% end %>
 </div>

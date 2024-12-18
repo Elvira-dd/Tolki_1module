@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "users/index"
+  get "recommendation/index"
   resources :authors
   resources :profiles
 
@@ -14,7 +16,11 @@ Rails.application.routes.draw do
   get "about_us/index"
   get "main/index"
   get "promo/index"
-  
+  get 'recommendation', to: 'recommendation#index'
+
+  resources :users
+  get 'my_profile', to: 'users#profile', as: :my_profile
+
   resources :subscriptions, only: [:create]
   resources :podcasts do 
     resources :issues 
@@ -47,6 +53,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
     end
   end  
+  resources :authors
   resources :subscriptions
   resources :issue do 
     resources :posts 

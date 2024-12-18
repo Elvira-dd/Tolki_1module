@@ -1,4 +1,5 @@
 <div class="IssueCard">
+    <%= link_to admin_issue_path(issue) do %>
     <% if issue.cover.present? %>
     <%= image_tag issue.cover, alt: issue.name, class: "IssueCoverImage" %>
     <% else %>
@@ -6,4 +7,5 @@
     <% end %>
     <h3><%= issue.name %></h3>
     <p><%= issue.created_at.strftime("%d.%m.%Y") %></p>
+    <% end %>
 </div>

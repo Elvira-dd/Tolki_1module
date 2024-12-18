@@ -5,7 +5,7 @@
 <div class="AuthorTop">
     <h2>Сегодня в топе эти авторы: </h2>
     <div class="AuthorTopList">
-        <% @authors.each do |author| %>
+        <% @authors_top.each do |author| %>
         <%= render partial: "authorcard", locals: { author: author } %>
         <% end %>
     </div>

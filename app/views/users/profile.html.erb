@@ -1,0 +1,12 @@
+<h1>Мой профиль</h1>
+
+<div class="profile">
+    <h2><%= @user.email %></h2>
+
+    <% if @user.profile.present? %>
+    <p>Имя: <%= @user.profile.name %></p>
+    <p>Описание: <%= @user.profile.bio %></p>
+    <% else %>
+    <p>Профиль не заполнен.</p>
+    <% end %>
+</div>

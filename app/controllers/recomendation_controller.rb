@@ -1,4 +1,4 @@
-class MainController < ApplicationController
+class RecomendationController < ApplicationController
   def index
     @podcasts = Podcast.all
     @authors = Author.all

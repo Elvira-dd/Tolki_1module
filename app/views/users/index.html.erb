@@ -1,0 +1,14 @@
+<h1>Список пользователей</h1>
+
+<div class="users-list">
+    <% @users.each do |user| %>
+    <div class="user-card">
+        <h3><%= user.email %></h3>
+        <% if user.profile.present? %>
+        <p>Профиль: <%= user.profile.inspect %></p>
+        <% else %>
+        <p>Профиль не заполнен</p>
+        <% end %>
+    </div>
+    <% end %>
+</div>
