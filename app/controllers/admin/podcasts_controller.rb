@@ -12,6 +12,9 @@ class Admin::PodcastsController < ApplicationController
     @issues = Issue.where(link: @podcast.name)
     @tags = @podcast.tags
     @authors = @podcast.authors
+
+    @podcast = Podcast.find(params[:id])
+    @posts = @podcast.posts.includes(:issue)
   end
 
   # GET /admin/podcasts/new

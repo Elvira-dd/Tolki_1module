@@ -2640,7 +2640,7 @@ def create_issues(quantity)
     Podcast.all.each do |podcast|
       i = 1
       quantity.to_a.sample.times do 
-        author = podcast.authors.create!(name: create_title, level:random_rating, description: create_sentence, avatar: "cover_test.png")
+        author = podcast.authors.create!(name: create_tag_text, level:random_rating, description: create_sentence, avatar: "cover_test.png")
         i += 1
       puts "Author with id #{author.id} just created for podcast id #{podcast.id}"
       end

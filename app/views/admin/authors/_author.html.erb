@@ -1,12 +1,19 @@
 <div id="<%= dom_id author %>">
-  <p>
-    <strong>Name:</strong>
-    <%= author.name %>
-  </p>
+    <div class="authorAvatar">
+        <% if author.avatar.present? %>
+        <%= image_tag author.avatar, alt: "Avatar Image" %>
+        <% else %>
+        <p>No avatar image available</p>
+        <% end %>
+    </div>
+    <p>
+        <strong>Name:</strong>
+        <%= author.name %>
+    </p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= author.description %>
-  </p>
+    <p>
+        <strong>Description:</strong>
+        <%= author.description %>
+    </p>
 
 </div>
