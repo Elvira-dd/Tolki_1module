@@ -5,8 +5,8 @@
 <div class="AuthorTop">
     <h2>Сегодня в топе эти авторы: </h2>
     <div class="AuthorTopList">
-        <% @authors_top.each do |author| %>
-        <%= render partial: "authorcard", locals: { author: author } %>
+        <% @profile_top.each do |profile| %>
+        <%= render partial: "authorcard", locals: { profile: profile } %>
         <% end %>
     </div>
 </div>

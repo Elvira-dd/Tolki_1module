@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "tags/show"
   get "users/index"
   get "recommendation/index"
   resources :authors
@@ -64,7 +65,9 @@ Rails.application.routes.draw do
   end
   resources :tags  
 end
-
+devise_scope :user do
+  delete '/users/sign_out', to: 'devise/sessions#destroy'
+end
 
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

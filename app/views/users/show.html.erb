@@ -1,0 +1,8 @@
+<h1>Авторы</h1>
+
+<% @users.each do |user| %>
+<div>
+    <h2><%= link_to user.name, profile_path(user) %></h2>
+    <p><%= truncate(user.bio, length: 100) %></p>
+</div>
+<% end %>

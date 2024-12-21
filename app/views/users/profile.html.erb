@@ -9,4 +9,5 @@
     <% else %>
     <p>Профиль не заполнен.</p>
     <% end %>
+    <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
 </div>

@@ -5,4 +5,7 @@ class UsersController < ApplicationController
   def profile
     @user = current_user
   end
+  def show
+    @users = Profile.where.not(user: current_user)
+  end
 end

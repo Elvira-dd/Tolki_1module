@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_17_132257) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_21_111110) do
   create_table "authors", force: :cascade do |t|
     t.text "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "avatar"
-    t.integer "level"
   end
 
   create_table "authors_podcasts", id: false, force: :cascade do |t|
@@ -89,6 +88,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_17_132257) do
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "level"
   end
 
   create_table "subscriptions", force: :cascade do |t|

@@ -2601,7 +2601,8 @@ def create_users(quantity)
       user_id: user.id,
       name: "Default User #{i}",
       bio: "This is the default bio for user #{user.email}.",
-      avatar: "default_avatar.png"
+      avatar: "default_avatar.png",
+      level: random_rating
     )
     puts "Profile created for user with id #{user.id}"
 
@@ -2622,6 +2623,7 @@ def create_issues(quantity)
       quantity.to_a.sample.times do 
         issue = podcast.issues.create!(name: "Выпуск #{create_title}", link: podcast.name, cover: "issue_cover_test.png")
         i += 1
+      puts "Issue created for podcast with id #{podcast.id}"
       end
     end
   end
@@ -2640,16 +2642,12 @@ def create_issues(quantity)
     Podcast.all.each do |podcast|
       i = 1
       quantity.to_a.sample.times do 
-        author = podcast.authors.create!(name: create_tag_text, level:random_rating, description: create_sentence, avatar: "cover_test.png")
+        author = podcast.authors.create!(name: create_tag_text, description: create_sentence, avatar: "cover_test.png")
         i += 1
       puts "Author with id #{author.id} just created for podcast id #{podcast.id}"
       end
     end
   end
-
-
-
-
 
 
 def create_post(quantity)
@@ -2658,11 +2656,13 @@ def create_post(quantity)
         boolComment = [true, false].sample
         quantity.to_a.sample.times do 
           user = User.all.sample
-            post = issue.posts.create!(title: create_title, content: create_content, link: "https://music.yandex.ru/album/#{issue.podcast.name}/#{i}", hashtag: create_title, is_comments_open: boolComment, user: user)
+          post = issue.posts.create!(title: create_title, content: create_content, link: "https://music.yandex.ru/album/#{issue.podcast.name}/#{i}", hashtag: create_title, is_comments_open: boolComment, user: user)
             i += 1
+          puts "Post with id #{post.id} just created for Issue with id #{issue.id}"
         end
     end
 end
+
 def create_comments(quantity)
   users = User.all
 
