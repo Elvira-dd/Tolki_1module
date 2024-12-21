@@ -1,0 +1,31 @@
+<div class="regTitle">
+    <h1>Приветствуем!</h1>
+    <p> Чтобы учавствовать в обсуждениях, оставлять отзывы, тебе нужно зарегистрироваться! </p>
+</div>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= render "devise/shared/error_messages", resource: resource %>
+
+<div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+</div>
+
+<div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+</div>
+
+<div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+</div>
+
+<div class="actions">
+    <%= f.submit "Зарегистрироваться" %>
+</div>
+<% end %>
+
+<p> Если у тебя уже есть аккаунт, смело <%= link_to "заходи", new_user_session_path%>, не стесняйся! </p>
