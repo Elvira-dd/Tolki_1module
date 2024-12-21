@@ -2592,8 +2592,18 @@ def create_users(quantity)
       user_data[:admin] = true
     end
 
+    # Создание пользователя
     user = User.create!(user_data)
     puts "User created with id #{user.id}"
+
+    # Создание профиля для пользователя
+    Profile.create!(
+      user_id: user.id,
+      name: "Default User #{i}",
+      bio: "This is the default bio for user #{user.email}.",
+      avatar: "default_avatar.png"
+    )
+    puts "Profile created for user with id #{user.id}"
 
     i += 1
   end
