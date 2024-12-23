@@ -1,13 +1,40 @@
 <h1>Мой профиль</h1>
+<div class="profileTitle">
+    <%= image_tag @user.profile.avatar, alt: @user.profile.name, class: "ProfileAvatarImage" if @user.profile.avatar.present? %>
 
-<div class="profile">
-    <h2><%= @user.email %></h2>
+    <h1> <%= @user.profile.name %> </h1>
+    <p> Знаток подкастов <%= @user.profile.level %> уровня </p>
 
-    <% if @user.profile.present? %>
-    <p>Имя: <%= @user.profile.name %></p>
-    <p>Описание: <%= @user.profile.bio %></p>
-    <% else %>
-    <p>Профиль не заполнен.</p>
-    <% end %>
-    <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+    <div class="profileTitleCount">
+        <div class="placeForCount small">
+            <p> 453 подписчика </p>
+        </div>
+        <div class="placeForCount small">
+            <p> 27 подписок </p>
+        </div>
+    </div>
+</div>
+<div class="profileStaticCount">
+    <div class="PlaceForCount big">
+        <h1> 25 </h1>
+        <p> подкастов оценено </p>
+    </div>
+    <div class="PlaceForCount big">
+        <h1> 125 </h1>
+        <p> написанных рецензий </p>
+    </div>
+    <div class="PlaceForCount big">
+        <h1> 341 </h1>
+        <p> дней в приложении </p>
+    </div>
+</div>
+<div class="profilePlaylists">
+</div>
+<div class="profilePosts">
+    <h2> Рецензии </h2>
+    <ul>
+        <% @posts.each do |post| %>
+        <%= render partial: "postcard", locals: { post: post } %>
+        <% end %>
+    </ul>
 </div>

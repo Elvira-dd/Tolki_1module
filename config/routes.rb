@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     get 'issues', to: 'issues#issues_for_podcast', as: 'issues_for'
   end
   namespace :admin do
+    resources :profiles
     resources :posts do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
     end

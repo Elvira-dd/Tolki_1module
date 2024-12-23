@@ -1,0 +1,11 @@
+<ul class="replies">
+    <% comment.replies.each do |reply| %>
+    <li class="replyCard">
+        <div class="replyHeader">
+            <p><strong><%= reply.user.profile.name %>:</strong></p>
+        </div>
+        <p><%= reply.content %></p>
+        <%= render partial: "comments/replies", locals: { comment: reply } %>
+    </li>
+    <% end %>
+</ul>

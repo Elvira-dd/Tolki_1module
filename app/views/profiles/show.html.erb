@@ -1,10 +1,39 @@
-<p style="color: green"><%= notice %></p>
+<div class="profileTitle">
+    <%= image_tag @profile.avatar, alt: @profile.name, class: "ProfileAvatarImage" if @profile.avatar.present? %>
 
-<%= render @profile %>
+    <h1> <%= @profile.name %> </h1>
+    <p> Знаток подкастов <%= @profile.level %> уровня </p>
 
-<div>
-  <%= link_to "Edit this profile", edit_profile_path(@profile) %> |
-  <%= link_to "Back to profiles", profiles_path %>
-
-  <%= button_to "Destroy this profile", @profile, method: :delete %>
+    <div class="profileTitleCount">
+        <div class="placeForCount small">
+            <p> 453 подписчика </p>
+        </div>
+        <div class="placeForCount small">
+            <p> 27 подписок </p>
+        </div>
+    </div>
+</div>
+<div class="profileStaticCount">
+    <div class="PlaceForCount big">
+        <h1> 25 </h1>
+        <p> подкастов оценено </p>
+    </div>
+    <div class="PlaceForCount big">
+        <h1> 125 </h1>
+        <p> написанных рецензий </p>
+    </div>
+    <div class="PlaceForCount big">
+        <h1> 341 </h1>
+        <p> дней в приложении </p>
+    </div>
+</div>
+<div class="profilePlaylists">
+</div>
+<div class="profilePosts">
+    <h2> Рецензии </h2>
+    <ul>
+        <% @posts.each do |post| %>
+        <%= render partial: "postcard", locals: { post: post } %>
+        <% end %>
+    </ul>
 </div>
