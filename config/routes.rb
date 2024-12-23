@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "themes/show"
   get "tags/show"
   get "users/index"
   get "recommendation/index"
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   get "main/index"
   get "promo/index"
   get 'recommendation', to: 'recommendation#index'
+  resources :themes
 
   resources :users
   get 'my_profile', to: 'users#profile', as: :my_profile

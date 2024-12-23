@@ -5,9 +5,16 @@
 <div class="podcastEditing">
     <%= link_to "Edit this podcast", edit_admin_podcast_path(@podcast) %>
 </div>
-<div class="podcastsTags">
-    <% @tags.each do |tag| %>
-    <%= render tag %>
+<div class="podcastThemes">
+    <h2>Теги</h2>
+    <% if @podcast.themes.any? %>
+    <ul>
+        <% @podcast.themes.each do |theme| %>
+        <li><%= theme.name %></li>
+        <% end %>
+    </ul>
+    <% else %>
+    <p>Этот подкаст пока не имеет тегов.</p>
     <% end %>
 </div>
 <div class="podcastsAuthors">
@@ -23,7 +30,7 @@
         <% end %>
     </div>
 </div>
-<h2>Posts</h2>
+<h2>Рецензии</h2>
 <div id="posts">
     <% if @posts.present? %>
     <% @posts.each do |post| %>

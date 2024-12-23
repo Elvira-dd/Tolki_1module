@@ -2556,151 +2556,136 @@ def create_title
     sentence = sentence_words.join(' ').capitalize + '.'
   end
 
-
-
-  def seed 
+  def seed
     reset_db
     create_users(10)
     create_podcast(10)
     create_issues(3..10)
     create_post(1..4)
     create_comments(1..6)
-    create_tags(1..3)
-    
+  
     3.times do
       create_comment_replies
     end
+  
     create_authors(1..3)
-end
-
-def reset_db
-Rake::Task['db:drop'].invoke
-Rake::Task['db:create'].invoke 
-Rake::Task['db:migrate'].invoke
-end
-
-def create_users(quantity)
-  i = 0
-
-  quantity.times do
-    user_data = {
-      email: "user_#{i}@email.com",
-      password: 'testtest'
-    }
-
-    if i == 0
-      user_data[:admin] = true
-    end
-
-    # Создание пользователя
-    user = User.create!(user_data)
-    puts "User created with id #{user.id}"
-
-    # Создание профиля для пользователя
-    Profile.create!(
-      user_id: user.id,
-      name: "Default User #{i}",
-      bio: "This is the default bio for user #{user.email}.",
-      avatar: "default_avatar.png",
-      level: random_rating
-    )
-    puts "Profile created for user with id #{user.id}"
-
-    i += 1
+    create_themes_and_assign_to_podcasts(20) # добавляем вызов метода для создания и присваивания тем
   end
-end
-
-def create_podcast(quantity)
-    quantity.times do 
-        podcast = Podcast.create!(name: @companies.sample[:name], description: create_sentence, cover: "cover_test.png", average_rating:"Средняя оценка:#{random_rating}/100" )
+  
+  def reset_db
+    Rake::Task['db:drop'].invoke
+    Rake::Task['db:create'].invoke
+    Rake::Task['db:migrate'].invoke
+  end
+  
+  def create_users(quantity)
+    i = 0
+  
+    quantity.times do
+      user_data = {
+        email: "user_#{i}@email.com",
+        password: 'testtest'
+      }
+  
+      if i == 0
+        user_data[:admin] = true
+      end
+  
+      # Создание пользователя
+      user = User.create!(user_data)
+      puts "User created with id #{user.id}"
+  
+      # Создание профиля для пользователя
+      Profile.create!(
+        user_id: user.id,
+        name: "Default User #{i}",
+        bio: "This is the default bio for user #{user.email}.",
+        avatar: "default_avatar.png",
+        level: random_rating
+      )
+      puts "Profile created for user with id #{user.id}"
+  
+      i += 1
     end
-end
-
-
-def create_issues(quantity)
+  end
+  
+  def create_podcast(quantity)
+    quantity.times do 
+      Podcast.create!(name: @companies.sample[:name], description: create_sentence, cover: "cover_test.png", average_rating: "Средняя оценка:#{random_rating}/100")
+    end
+  end
+  
+  def create_issues(quantity)
     Podcast.all.each do |podcast|
       i = 1
       quantity.to_a.sample.times do 
         issue = podcast.issues.create!(name: "Выпуск #{create_title}", link: podcast.name, cover: "issue_cover_test.png")
         i += 1
-      puts "Issue created for podcast with id #{podcast.id}"
+        puts "Issue created for podcast with id #{podcast.id}"
       end
     end
   end
-
-  def create_tags(quantity)
-    Podcast.all.each do |podcast|
-      i = 1
-      quantity.to_a.sample.times do 
-        tag = podcast.tags.create!(text: create_tag_text, cover: "tag_cover_test.png")
-        i += 1
-      puts "Tag with id #{tag.id} just created and podcast id #{podcast.id}"
-      end
-    end
-  end
+  
   def create_authors(quantity)
     Podcast.all.each do |podcast|
       i = 1
       quantity.to_a.sample.times do 
         author = podcast.authors.create!(name: create_tag_text, description: create_sentence, avatar: "cover_test.png")
         i += 1
-      puts "Author with id #{author.id} just created for podcast id #{podcast.id}"
+        puts "Author with id #{author.id} just created for podcast id #{podcast.id}"
       end
     end
   end
-
-
-def create_post(quantity)
+  
+  def create_post(quantity)
     Issue.all.each do |issue|
-        i = 1
-        boolComment = [true, false].sample
-        quantity.to_a.sample.times do 
-          user = User.all.sample
-          post = issue.posts.create!(title: create_title, content: create_content, link: "https://music.yandex.ru/album/#{issue.podcast.name}/#{i}", hashtag: create_title, is_comments_open: boolComment, user: user)
-            i += 1
-          puts "Post with id #{post.id} just created for Issue with id #{issue.id}"
-        end
-    end
-end
-
-def create_comments(quantity)
-  users = User.all
-
-  Post.all.each do |post|
-    i = 1
-    quantity.to_a.sample.times do 
-      comment = post.comments.create!(content: create_sentence, 
-                                      user_name: user.email, 
-                                      user: user,
-                                      post_id: post.id)
-      i += 1
+      i = 1
+      boolComment = [true, false].sample
+      quantity.to_a.sample.times do 
+        user = User.all.sample
+        post = issue.posts.create!(title: create_title, content: create_content, link: "https://music.yandex.ru/album/#{issue.podcast.name}/#{i}", hashtag: create_title, is_comments_open: boolComment, user: user)
+        i += 1
+        puts "Post with id #{post.id} just created for Issue with id #{issue.id}"
+      end
     end
   end
-end
-
-def create_comments(quantity)
-  posts = Post.where(is_comments_open: true)
-
-  posts.each do |post|
-  quantity.to_a.sample.times do
-    user = User.all.sample
-    comment = Comment.create!(
-      post_id: post.id,
-      content: create_sentence,
-      user_id: user.id
-    )
-
-      puts "Comment with id #{comment.id} for post with id #{comment.post.id} just created"
+  
+  def create_comments(quantity)
+    posts = Post.where(is_comments_open: true)
+  
+    posts.each do |post|
+      quantity.to_a.sample.times do
+        user = User.all.sample
+        comment = Comment.create!(
+          post_id: post.id,
+          content: create_sentence,
+          user_id: user.id
+        )
+  
+        puts "Comment with id #{comment.id} for post with id #{comment.post.id} just created"
+      end
     end
   end
-end
-
-def create_comment_replies
-  Comment.all.each do |comment|
-    if rand(1..3) == 1
-      comment_reply = comment.replies.create!(post_id: comment.post_id, content: create_sentence, user_id: comment.user.id)
-      puts "Comment reply with id #{comment.id} for post with id #{comment.post.id} just created"
+  
+  def create_comment_replies
+    Comment.all.each do |comment|
+      if rand(1..3) == 1
+        comment_reply = comment.replies.create!(post_id: comment.post_id, content: create_sentence, user_id: comment.user.id)
+        puts "Comment reply with id #{comment.id} for post with id #{comment.post.id} just created"
+      end
     end
   end
-end
+  
+  def create_themes_and_assign_to_podcasts(theme_count)
+    themes = theme_count.times.map do |i|
+      Theme.create!(name: "Theme ##{i + 1}", cover:"tag_cover_test.png")
+    end
+    # theme_names = ["История", "Секс", "Искусство", "Исто"]
+    # themes = theme_names.map { |name| Theme.find_or_create_by!(name: name) }
+  
+    Podcast.all.each do |podcast|
+      podcast.themes = themes.sample(rand(1..3))
+      puts "Assigned themes to podcast with id #{podcast.id}"
+    end
+  end
 seed

@@ -10,7 +10,6 @@ class Admin::PodcastsController < ApplicationController
   # GET /admin/podcasts/1
   def show
     @issues = Issue.where(link: @podcast.name)
-    @tags = @podcast.tags
     @authors = @podcast.authors
 
     @podcast = Podcast.find(params[:id])

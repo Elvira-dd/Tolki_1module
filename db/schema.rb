@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_21_111110) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_23_221936) do
   create_table "authors", force: :cascade do |t|
     t.text "name"
     t.text "description"
@@ -67,6 +67,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_21_111110) do
     t.string "average_rating"
   end
 
+  create_table "podcasts_themes", id: false, force: :cascade do |t|
+    t.integer "podcast_id", null: false
+    t.integer "theme_id", null: false
+    t.index ["podcast_id", "theme_id"], name: "index_podcasts_themes_on_podcast_id_and_theme_id"
+    t.index ["theme_id", "podcast_id"], name: "index_podcasts_themes_on_theme_id_and_podcast_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -104,6 +111,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_21_111110) do
     t.datetime "updated_at", null: false
     t.text "cover"
     t.index ["podcast_id"], name: "index_tags_on_podcast_id"
+  end
+
+  create_table "themes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "cover"
   end
 
   create_table "users", force: :cascade do |t|

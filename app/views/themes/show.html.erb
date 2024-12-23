@@ -1,0 +1,18 @@
+<h1>Тема: <%= @theme.name %></h1>
+<div class="theme-cover">
+    <%= image_tag @theme.cover %>
+</div>
+
+<h2>Подкасты с этой темой</h2>
+<% if @podcasts.any? %>
+<ul>
+    <% @podcasts.each do |podcast| %>
+    <li>
+        <%= link_to podcast.name, podcast_path(podcast) %>
+        <p><%= podcast.description %></p>
+    </li>
+    <% end %>
+</ul>
+<% else %>
+<p>Пока нет подкастов с этой темой.</p>
+<% end %>

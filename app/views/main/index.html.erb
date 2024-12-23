@@ -40,8 +40,19 @@
         <h4>посмотреть все</h4>
     </div>
     <div class="ThemeList">
-        <% @tags.each do |tag| %>
-        <%= render partial: "tagcard", locals: { tag: tag } %>
+        <% if @themes.any? %>
+        <ul>
+            <% @themes.each do |theme| %>
+            <li>
+                <%= link_to theme_path(theme) do %>
+                <%= image_tag theme.cover %>
+                <span><%= theme.name %></span>
+                <% end %>
+            </li>
+            <% end %>
+        </ul>
+        <% else %>
+        <p>Темы пока не созданы.</p>
         <% end %>
     </div>
 </div>
