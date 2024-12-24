@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_24_084019) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "cover"
-    t.string "average_rating"
+    t.string ""
   end
 
   create_table "podcasts_themes", id: false, force: :cascade do |t|

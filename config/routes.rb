@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   namespace :api, format: "json" do
     namespace :v1 do
       resources :posts, only: [:index, :show]
+      resources :authors, only: [:index, :show]
+      resources :issues, only: [:index, :show]
+      resources :podcasts, only: [:index, :show]
+      resources :themes, only: [:index, :show]
     end
   end
   
