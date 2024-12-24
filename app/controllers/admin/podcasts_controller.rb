@@ -1,6 +1,10 @@
 class Admin::PodcastsController < ApplicationController
   load_and_authorize_resource
   before_action :set_podcast, only: %i[show edit update destroy]
+  def issues
+    podcast = Podcast.find(params[:id])
+    render json: podcast.issues.select(:id, :name)
+  end
 
   # GET /admin/podcasts
   def index

@@ -2617,11 +2617,12 @@ def create_title
   
   def create_issues(quantity)
     Podcast.all.each do |podcast|
+      puts "Creating issues for podcast with id #{podcast.id}"
       i = 1
       quantity.to_a.sample.times do 
         issue = podcast.issues.create!(name: "Выпуск #{create_title}", link: podcast.name, cover: "issue_cover_test.png")
+        puts "Issue created for podcast with id #{podcast.id}, issue id: #{issue.id}"
         i += 1
-        puts "Issue created for podcast with id #{podcast.id}"
       end
     end
   end

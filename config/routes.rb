@@ -26,6 +26,9 @@ Rails.application.routes.draw do
 
   resources :subscriptions, only: [:create]
   resources :podcasts do 
+    member do
+      get :issues
+    end
     resources :issues 
     get 'issues', to: 'issues#issues_for_podcast', as: 'issues_for'
   end
@@ -35,6 +38,10 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
+    collection do
+      get :select_podcast_and_issue
+      post :create_post_step
+    end
     member do
       get "like"
     end
@@ -47,6 +54,9 @@ Rails.application.routes.draw do
   resources :tags  
   
   namespace :admin do
+    resources :issues do
+      resources :posts, only: [:new, :create]
+    end
   resources :podcasts do 
     resources :issues 
     get 'issues', to: 'issues#issues_for_podcast', as: 'issues_for'

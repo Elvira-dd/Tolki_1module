@@ -14,8 +14,10 @@ class Admin::PostsController < ApplicationController
   end
 
   # GET /posts/new
+
   def new
     @post = Post.new
+    @podcasts = Podcast.all
   end
 
   # GET /posts/1/edit
@@ -23,16 +25,15 @@ class Admin::PostsController < ApplicationController
   end
 
   # POST /posts or /posts.json
-  def create
-    @issue = Issue.find(params[:issue_id]) # Ensure you have access to the issue
-    @post = @issue.posts.new(post_params.merge(user_id: current_user.id))
-  
-    if @post.save
-      redirect_to admin_issue_post_path(@issue, @post), notice: 'Post was successfully created.'
 
-    else
-      render :new
-    end
+  def create
+    @post = current_user.posts.new(post_params)  # Используем current_user для привязки поста к пользователю
+
+  if @post.save
+    redirect_to @post, notice: 'Пост был успешно создан.'
+  else
+    render :new
+  end
   end
 
   # PATCH/PUT /posts/1 or /posts/1.json
@@ -66,6 +67,6 @@ class Admin::PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content, :is_comments_open, :link, :hashtag)
+      params.require(:post).permit(:title, :content, :is_comments_open, :podcast_id, :issue_id, :user_id)
     end
 end

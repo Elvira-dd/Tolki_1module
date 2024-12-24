@@ -1,26 +1,26 @@
 <%= form_with(model: [:admin, @issue, @post]) do |form| %>
-  <% if @post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul>
+<% if @post.errors.any? %>
+<div style="color: red">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <ul>
         <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <li><%= message %></li>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-<div class="createPostForm"> 
-    <%= form.text_field :title, placeholder: "Манящий заголовок", class: 'classicInput'%>
-  <%= form.text_area :content, placeholder: "Ваше мнение во всей красе", class: 'classicInput'%>
-  <div class="checkBoxInput">
-  <%= form.check_box :is_comments_open %>
-  <%= form.label :is_comments_open, "Комменты будем открывать?", style: "display: block" %>
-  
-   </div>
-  
-  <%= form.text_field :link, placeholder: "Ссылочку где слушали", class: 'classicInput'%>
-  <%= form.text_field :hashtag, placeholder: "#краткостьСестраТаланта", class: 'classicInput'%>
-
-  <%= form.submit "Отправить", class:"formButton"%>
+    </ul>
+</div>
 <% end %>
+<div class="createPostForm">
+    <%= form.text_field :title, placeholder: "Манящий заголовок", class: 'classicInput'%>
+    <%= form.text_area :content, placeholder: "Ваше мнение во всей красе", class: 'classicInput'%>
+    <div class="checkBoxInput">
+        <%= form.check_box :is_comments_open %>
+        <%= form.label :is_comments_open, "Комменты будем открывать?", style: "display: block" %>
+
+    </div>
+
+    <%= form.text_field :link, placeholder: "Ссылочку где слушали", class: 'classicInput'%>
+    <%= form.text_field :hashtag, placeholder: "#краткостьСестраТаланта", class: 'classicInput'%>
+
+    <%= form.submit "Отправить", class:"formButton"%>
+    <% end %>
 </div>
